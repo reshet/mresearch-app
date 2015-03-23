@@ -6,9 +6,11 @@ import android.content.res.Configuration;
 import android.os.Build;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.webkit.ConsoleMessage;
 import android.webkit.WebChromeClient;
 import android.webkit.WebSettings;
 import android.webkit.WebStorage;
@@ -18,6 +20,8 @@ import android.webkit.WebViewClient;
 
 public class MainActivity extends Activity {
 
+    //private static final String SARS2_URL = "http://172.29.92.8:8080/";
+    private static final String SARS2_URL = "http://dev.survey-archive.com:8095/";
     private WebView mWebView;
 
     public void onCreate(Bundle savedInstanceState) {
@@ -26,6 +30,14 @@ public class MainActivity extends Activity {
 
         mWebView = (WebView) findViewById(R.id.webview);
         mWebView.setWebViewClient(new HelloWebViewClient());
+        mWebView.setWebChromeClient(new WebChromeClient() {
+            public boolean onConsoleMessage(ConsoleMessage cm) {
+                Log.d("SARS2-web-view: ", cm.message() + " -- From line "
+                        + cm.lineNumber() + " of "
+                        + cm.sourceId());
+                return true;
+            } });
+
         // включаем поддержку JavaScript
         mWebView.getSettings().setJavaScriptEnabled(true);
 
@@ -40,7 +52,7 @@ public class MainActivity extends Activity {
         if (savedInstanceState == null)
         {
             // указываем страницу загрузки
-            mWebView.loadUrl("http://dev.survey-archive.com:8095/");
+            mWebView.loadUrl(SARS2_URL);
         }
     }
 
