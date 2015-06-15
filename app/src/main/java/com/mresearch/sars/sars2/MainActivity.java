@@ -23,8 +23,9 @@ import java.io.File;
 
 public class MainActivity extends Activity {
 
-    //private static final String SARS2_URL = "http://192.168.0.104:8095/";
-    private static final String SARS2_URL = "http://dev.survey-archive.com:8095/";
+    //private static final String SARS2_URL = "http://192.168.0.101:8095/";
+    //private static final String SARS2_URL = "http://dev.survey-archive.com:8095/";
+    private static final String SARS2_URL = "http://sars.survey-archive.com";
     private WebView mWebView;
     final Activity activity = this;
 
